@@ -1,0 +1,7 @@
+#fsb.c
+format string attackによるメモリ読み出し
+参考にさせていただいた文献よりUbuntu環境で実行するものになります。
+wslでやると便利です。
+
+参考にさせていただいた文献
+https://inaz2.hatenablog.com/entry/2014/04/20/022809
