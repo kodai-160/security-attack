@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>XSS Demo</title>
+</head>
+<body>
+    <h1>XSS Demo Site</h1>
+    <form>
+        <input type="text" id="inputText" placeholder="ここにテキストを入力">
+        <button type="button" onclick="addText()">送信</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+        function addText() {
+            var userInput = document.getElementById('inputText').value;
+            document.getElementById('output').innerHTML = userInput;
+        }
+    </script>
+</body>
+</html>
