@@ -1,5 +1,6 @@
 const express = require("express")
 const api = require("./routes/api"); //api.jsを読み込む
+const csrf = require("./routes/csrf"); 
 const crypto = require("crypto");
 const app = express();
 const port = 3000;
@@ -9,6 +10,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public")); //頻繁に使用する関数の指定
 
 app.use("/api", api);
+app.use("/csrf", csrf);
 
 app.get("/", (req, res, next) => {
     res.end("Top Page");
