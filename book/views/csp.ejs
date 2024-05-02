@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CSP検証ページ</title>
+    </head>
+    <body>
+        <script nonce="<%= nonce %>">
+        // alert('Hello, CSP!')
+
+        // const script = document.createElement("script");
+        // script.src = "./csp-test.js";
+        // document.body.appendChild(script);
+        if (window.trustedTypes && trustedTypes.createPolicy) {
+            //ポリシー関数を定義する
+            const policy = trustedTypes.createPolicy("script-url", {
+                //<script>要素のsrcに設定するURLをチェック
+                createScriptURL: (str) => {
+                    //strのURL文字列からOriginを取得する場合URLオブジェクトにする
+                    const url = new URL(str, location.origin);
+                    if (url.origin !== location.origin) {
+                        //クロスオリジンの場合破棄する
+                        throw new Error("クロスオリジンは許可されていません");
+                    }
+                    //同一オリジンの場合のみURLを返す
+                    return url;
+                }
+            });
+
+            const script = document.createElement("script");
+            //作成したポリシーに関数により検査されTrustedURLに変換された値は代入可能になる
+            script.src = policy.createScriptURL("http://site.example:3000/csp-test.js");
+            document.body.appendChild(script);
+        }
+        </script>
+    </body>
+</html>
