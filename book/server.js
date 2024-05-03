@@ -7,7 +7,11 @@ const port = 3000;
 
 app.set("view engine", "ejs");
 
-app.use(express.static("public")); //頻繁に使用する関数の指定
+app.use(express.static("public", {
+    setHeaders: (res, path, stat) => {
+        res.header("X-Frame-Options", "SAMEORIGIN");
+    }
+}));
 
 app.use("/api", api);
 app.use("/csrf", csrf);
