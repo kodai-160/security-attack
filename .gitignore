@@ -5,3 +5,7 @@ book/package-lock.json
 book/package.json
 
 book/mkcert-1.4.4
+
+try/node_modules
+
+try/package-lock.json
