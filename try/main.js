@@ -1,18 +1,15 @@
 const { app, BrowserWindow } = require('electron');
 
-app.on('ready', () => {
-    let win = new BrowserWindow({
-        webPreferences: {
-            nodeIntegretion: false,
-            contextIsolation: false,
-            sandbox: true
-        }
-    });
+function createWindow() {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false  // コンテキスト隔離を無効にする
+    }
+  });
+  win.loadFile('index.html');
+}
 
-    win.loadFile('index.html');
-    win.show();
-});
-
-angular.module('myApp', []).controller('myCtrl', function($scope) {
-    $scope.xssInput = 'AngularJS content goes here';
-});
+app.whenReady().then(createWindow);

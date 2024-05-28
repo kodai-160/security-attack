@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>XSS-Test</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-        <script src="main.js"></script>
-    </head>
-    
-    <body ng-app="myApp" ng-csp ng-controller="myCtrl">
-        <input ng-model="xssInput" />
-        <div>{{ }}</div>
-    </body>
+<head>
+  <title>脆弱なElectronアプリ</title>
+</head>
+<body>
+  <h1>脆弱なElectronアプリケーション</h1>
+  <input type="text" id="input" placeholder="コメントを入力してください">
+  <button onclick="runCommand()">コメント投稿</button>
+  <script>
+    function runCommand() {
+      const input = document.getElementById('input').value;
+      eval(input); // 警告: この使用法は非常に危険です。
+    }
+  </script>
+</body>
 </html>
